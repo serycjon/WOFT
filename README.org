@@ -50,7 +50,7 @@ python WOFT_demo.py demo/V24_7/
 
 Feel free to try other configs, like for example:
 #+BEGIN_SRC sh
-python WOFT_demo.py demo/V25_2/ --config configs/WOFT_downscale_3x.py
+python WOFT_demo.py demo/V25_2/ --config pytracking/configs/WOFT_downscale_3x.py
 #+END_SRC
 
 ** Acknowledgments
