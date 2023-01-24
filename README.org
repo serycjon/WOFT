@@ -1,0 +1,58 @@
+* Planar Object Tracking via Weighted Optical Flow
+[[https://cmp.felk.cvut.cz/~serycjon/WOFT/][Project Page]]
+
+Official implementation of the WOFT tracker from the paper
+
+[[https://cmp.felk.cvut.cz/~serycjon/][Jonáš Šerých]], [[https://cmp.felk.cvut.cz/~matas/][Jiří Matas]]: "*Planar Object Tracking via Weighted Optical Flow*", WACV 2023
+
+Please cite our paper, if you use any of this.
+#+begin_example
+@inproceedings{serych2023planar,
+               title={Planar Object Tracking via Weighted Optical Flow},
+               author={{\v{S}}er{\'{y}}ch, Jon{\'{a}}{\v{s}} and Matas, Ji{\v{r}}{\'{i}}},
+	       booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+               pages={1593--1602},
+               year={2023}
+}
+#+end_example
+
+** License
+This work is licensed under the [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International]] license.
+The ~pytracking/external/RAFT~ directory contains a slightly modified copy of [[https://github.com/princeton-vl/RAFT][RAFT]], which is licensed under BSD-3-Clause license, except for the ~pytracking/external/RAFT/raft_core/weighted_raft.py~ file, which is again licensed under the [[https://creativecommons.org/licenses/by-nc-sa/4.0/][Attribution-NonCommercial-ShareAlike 4.0 International]].
+The ~demo~ directory includes samples from the [[https://www3.cs.stonybrook.edu/~hling/data/POT-210/planar_benchmark.html][POT-210]] dataset.
+** Installation
+#+BEGIN_SRC sh
+python -m pip install virtualenv
+python -m virtualenv envs/WOFT
+source envs/WOFT/bin/activate
+python -m pip install tqdm einops opencv-python kornia==0.5.11 ipdb pandas matplotlib scipy
+#+END_SRC
+
+For the liteflownet experiment, you also have to install the following
+#+BEGIN_SRC sh
+python -m pip install -U openmim
+mim install mmcv-full
+mim download mmflow --config liteflownet2_ft_4x1_600k_sintel_kitti_320x768
+
+# we use a very slightly modified / patched version of mmflow (included as submodule):
+git submodule update --init --recursive
+cd pytracking/external/mmflow
+python -m pip install -v -e .
+#+END_SRC
+
+** Demo
+for video demo, run:
+#+BEGIN_SRC sh
+python WOFT_demo.py demo/V25_2/
+# or
+python WOFT_demo.py demo/V24_7/
+#+END_SRC
+
+Feel free to try other configs, like for example:
+#+BEGIN_SRC sh
+python WOFT_demo.py demo/V25_2/ --config configs/WOFT_downscale_3x.py
+#+END_SRC
+
+** Acknowledgments
+This work was supported by Toyota Motor Europe, by CTU student grant ~SGS20/171/OHK3/3T/13~, and by the Research Center for Informatics project ~CZ.02.1.01/0.0/0.0/16_019/0000765~ funded by OP VVV.
+
