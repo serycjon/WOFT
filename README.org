@@ -28,16 +28,17 @@ source envs/WOFT/bin/activate
 python -m pip install tqdm einops opencv-python kornia==0.5.11 ipdb pandas matplotlib scipy
 #+END_SRC
 
-For the liteflownet experiment, you also have to install the following
+For the liteflownet experiment, install the following
 #+BEGIN_SRC sh
-python -m pip install -U openmim
-mim install mmcv-full
-mim download mmflow --config liteflownet2_ft_4x1_600k_sintel_kitti_320x768
+python -m pip install torch==1.8.1 torchvision==0.9.1 tqdm einops opencv-python kornia==0.5.11 ipdb pandas matplotlib scipy openmim==0.2.1
+mim install mmcv-full==1.6.1
 
 # we use a very slightly modified / patched version of mmflow (included as submodule):
 git submodule update --init --recursive
 cd pytracking/external/mmflow
 python -m pip install -v -e .
+
+mim download mmflow --config liteflownet2_ft_4x1_600k_sintel_kitti_320x768
 #+END_SRC
 
 ** Demo

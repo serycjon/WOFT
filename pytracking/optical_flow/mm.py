@@ -1,23 +1,14 @@
-import sys
-from pathlib import Path
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import einops
 import numpy as np
-from types import SimpleNamespace
-# from timeit import default_timer as timer
-from pytracking.utils.timing import cuda_time_measurer as time_measurer
+# from pytracking.utils.timing import cuda_time_measurer as time_measurer
 # from pytracking.utils.timing import time_measurer
+from pytracking.utils.misc import torch_get_featuremap_coords, get_featuremap_coords
 import mmflow.apis
 import logging
 logger = logging.getLogger(__name__)
-
-from pytracking.utils.various_utils import SparseExceptionLogger
-from pytracking.utils.misc import torch_get_featuremap_coords, get_featuremap_coords
-from pytracking.utils.wraft_gui import wRAFTGUI
-from pytracking.utils.caching import load_cached_flow
-from pytracking.utils.timing import cuda_time_measurer as time_measurer
 
 
 class MMFlowWrapper():
