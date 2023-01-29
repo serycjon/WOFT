@@ -408,7 +408,7 @@ def torch_reproj_errors(GT_H, est_H, pts_A):
     # from pytorch docs https://pytorch.org/docs/stable/generated/torch.linalg.inv.html#torch.linalg.inv
     # Consider using torch.linalg.solve() if possible for multiplying a matrix on the left by the inverse, as:
     # torch.linalg.solve(A, B) == A.inv() @ B
-    # It is always prefered to use solve() when possible, as it is faster and more numerically stable than computing the inverse explicitly.
+    # It is always preferred to use solve() when possible, as it is faster and more numerically stable than computing the inverse explicitly.
     # BUT: for my current combination of pytorch / cuda / stuff, this gives error: RuntimeError: CUDA error: invalid configuration argument
     #      when used on more than approx 500 pts_A
     # reproj_pts = torch.linalg.solve(est_H, torch.matmul(GT_H, kgc.convert_points_to_homogeneous(pts_A.permute(0, 2, 1)).permute(0, 2, 1)))
